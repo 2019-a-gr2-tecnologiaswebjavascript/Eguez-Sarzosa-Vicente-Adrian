@@ -1,19 +1,23 @@
-<h1 class="rojo">Titulo {{title}}</h1>
+<h1 [class]="claseTitulo">Titulo {{title}}</h1>
 <!-- {{interpolacion}}  -->
-<app-item-galeria
-    nombreItem="Papitas"
-    textoBoton="A lo bestia"
->
-</app-item-galeria>
 
-<app-item-galeria
-    nombreItem="Carnitas"
-    textoBoton="Gorditas"
->
-</app-item-galeria>
+<pre>
+    {{_carritoService.carritoCompras | json}}
+</pre>
 
-<app-item-galeria
-    nombreItem="Chicas"
-    textoBoton="Cheveres"
->
-</app-item-galeria>
+<button (click)="mostrar(true)">Mostrar</button>
+
+<button (click)="mostrar(false)">Ocultar</button>
+
+<div *ngIf="estaMostrando">
+    <app-item-galeria 
+    *ngFor="let flor of arregloFloresJs"
+    [titulo]="flor.titulo"
+    [textoBoton]="flor.nombre"
+    [nombreItem]="flor.descripcion"
+    [notas]="flor.notas"
+    (cambioChela)="cambioChela($event)"
+    (cambioCerveza)="cambioCerveza($event)"
+    >
+    </app-item-galeria>
+</div>
