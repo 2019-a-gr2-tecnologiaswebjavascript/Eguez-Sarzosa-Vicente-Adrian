@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Floreria';
+  claseTitulo = 'rojo';
+  estaMostrando = false;
 
   arregloFlores = [
     new Flor("Papitas","A lo bestia"),
@@ -16,7 +18,8 @@ export class AppComponent {
 
   arregloFloresJs = [
     {
-      nombre:"Papitas",
+      titulo: "Don Jose",
+      nombre: "Papitas",
       descripcion:"A lo bestia",
       // dato:1,
       // dato1:1.1,
@@ -26,10 +29,12 @@ export class AppComponent {
       // dato6:null
     },
     {
+      titulo: "Don Pepito",
       nombre:"Carnitas",
       descripcion:"Gorditas"
     },
     {
+      titulo: "Doña Maria",
       nombre:"Chicas",
       descripcion:"Cheveres"
     }
@@ -39,11 +44,17 @@ export class AppComponent {
   cambioChela(evento:boolean){
     // logica hacerle verde
     console.log('Llego a chela: ', evento);
+    this.claseTitulo = 'verde';
   }
 
   cambioCerveza(evento:boolean){
     // logica hacerle amarillo
     console.log('Llego a cerveza: ', evento);
+    this.claseTitulo = 'amarillo';
+  }
+
+  mostrar(estaMostrando){
+    this.estaMostrando = estaMostrando;
   }
 
 

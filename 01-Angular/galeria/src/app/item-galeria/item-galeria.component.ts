@@ -1,13 +1,16 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-item-galeria',
   templateUrl: './item-galeria.component.html',
   styleUrls: ['./item-galeria.component.css']
 })
-export class ItemGaleriaComponent implements OnInit {
+export class ItemGaleriaComponent implements OnInit,OnDestroy {
 
   title = 'Licoreria';
+
+  @Input()
+  titulo; 
 
   @Input()
   textoBoton;   
@@ -27,8 +30,7 @@ export class ItemGaleriaComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  
 
   alertar(){
     alert('Auxilio me desmayo: ' + this.nombreItem);
@@ -51,6 +53,14 @@ export class ItemGaleriaComponent implements OnInit {
     // var url2 = "http://img.chilango.com/2016/01/cervezas-cervezas-cervezas.jpghttp://img.chilango.com/2016/01/cervezas-cervezas-cervezas.jpg"
     // let url3 = "http://img.chilango.com/2016/01/cervezas-cervezas-cervezas.jpghttp://img.chilango.com/2016/01/cervezas-cervezas-cervezas.jpg"
     // this.url = url1;
+  }
+
+  ngOnInit() {
+    console.log("'Empezo'");
+  }
+
+  ngOnDestroy(){
+    console.log('"Termino"');
   }
 
 
@@ -80,9 +90,55 @@ class Usuario{
 
 
 
+/*
+Ciclo de vida del componente
+
+ngOnInit -> OnInit -> Instancia
+ngOnDestroy -> OnDestroy
+
+*/ 
+
+/*
+- RUTA -> LOGIN/MODULOS/ETC
+  - PAPA []->hijo  []->hija
+    - HIJO []->nieto ()->papa
+      - NIETO ->()->hijo
+  - HIJA
+    - NIETA
+  - TIO
+    - PRIMO
+*/
+
+
+/* - SERVICIO
+><
+  - PAPA
+    - HIJO
+      - NIETO
+  - HIJA
+    - NIETA
+  - TIO
+    - PRIMO
+*/
 
 
 
+/*
 
+# -> Modulo
+* -> Componente
+- -> Servicio
 
+# ModuloPrincial (AppModule)
+  *  ComponentePrincipal (AppComponent) 
 
+.........................
+# ModuloNotas (NotasModule)
+  *  TablaMostrarMateria 
+     _ [] notasPorMateria
+     _ [] nombreBoton
+     _ [] iconoBoton
+     _ () ejecutoAccion
+  *  listaMaterias
+     _ () seleccionoMateria
+*/
