@@ -22,6 +22,7 @@ export class AppComponent {
       titulo: "Don Jose",
       nombre: "Papitas",
       descripcion:"A lo bestia",
+      notas:['Hot Dog', 'Hamburguesas']
       // dato:1,
       // dato1:1.1,
       // dato3:" asdasd ",
@@ -32,12 +33,20 @@ export class AppComponent {
     {
       titulo: "Don Pepito",
       nombre:"Carnitas",
-      descripcion:"Gorditas"
+      descripcion:"Gorditas",
+      notas:[
+        'Papitas',
+        'Empanadas',
+      ]
     },
     {
       titulo: "Doña Maria",
       nombre:"Chicas",
-      descripcion:"Cheveres"
+      descripcion:"Cheveres",
+      notas:[
+        'Motes',
+        'Fritada',
+      ]
     }
   ]
 
