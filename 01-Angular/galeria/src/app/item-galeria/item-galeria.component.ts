@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy,  } from '@angular/core';
+import { CarritoService } from '../servicios/carrito/carrito.service';
 
 @Component({
   selector: 'app-item-galeria',
@@ -28,7 +29,12 @@ export class ItemGaleriaComponent implements OnInit,OnDestroy {
 
   notas = [1,2,3,4,5,6,7,8,9,10]
 
-  constructor() { }
+  // Dependency
+  // Injection
+  // Injeccion de dependencias
+  // SERVICIOS -> COMPONENTES
+  // SERVICIOS -> SERVICIOS
+  constructor(private readonly _carritoService:CarritoService ) { }
 
   
 
@@ -57,10 +63,22 @@ export class ItemGaleriaComponent implements OnInit,OnDestroy {
 
   ngOnInit() {
     console.log("'Empezo'");
+    console.log(this._carritoService.carritoCompras);
   }
 
   ngOnDestroy(){
     console.log('"Termino"');
+  }
+
+  agregarCarrito(valorCarrito:number){
+    // this._carritoService.carritoCompras.push(itemCarrito);
+    const itemCarrito = {
+      valor: valorCarrito,
+      nombreTienda: this.titulo
+    };
+    this._carritoService.carritoCompras
+                        .splice(0,0,itemCarrito);
+    console.log(this._carritoService.carritoCompras);
   }
 
 

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CarritoService } from './servicios/carrito/carrito.service';
 
 @Component({
   selector: 'app-root',
@@ -40,6 +41,9 @@ export class AppComponent {
     }
   ]
 
+  constructor(private readonly _carritoService:CarritoService){
+    
+  }
 
   cambioChela(evento:boolean){
     // logica hacerle verde
