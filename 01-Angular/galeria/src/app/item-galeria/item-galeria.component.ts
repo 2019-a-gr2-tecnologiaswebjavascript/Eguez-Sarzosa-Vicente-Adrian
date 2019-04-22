@@ -190,10 +190,6 @@ id -> Valor
  1.1 Existe) 
   Aumentamos el contador
 
-
-
-
-
  1.2 No existe)
   Creamos el contador y lo seteamos en 1
 
