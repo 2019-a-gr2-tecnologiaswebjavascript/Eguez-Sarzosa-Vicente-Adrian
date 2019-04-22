@@ -79,9 +79,10 @@ export class ItemGaleriaComponent implements OnInit,OnDestroy {
       nombreTienda: this.titulo,
       fechaCompra:new Date()
     };
-    this._carritoService.carritoCompras
-                        .splice(0,0,itemCarrito);
-    console.log(this._carritoService.carritoCompras);
+    const respuestaCarrito = this._carritoService
+          .agregarCarritoDeCompras(itemCarrito);
+    console.log(respuestaCarrito);
+    
   }
 
 
