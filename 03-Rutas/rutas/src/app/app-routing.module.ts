@@ -13,7 +13,7 @@ const routes: Routes = [
      component: RutaHomeComponent
   },
   {
-     path: 'creditos',
+     path: 'creditos/:idCredito/:tasaReferencia',
      component: RutaCreditosComponent
   },
   {
@@ -34,7 +34,14 @@ const routes: Routes = [
   {
      path: 'no-encontrada',
      component: RutaNoEncontradaComponent
-  }
+  },
+  { path: '',
+    redirectTo: '/home/app',
+    pathMatch: 'full'
+  },
+  { 
+    path: '**', 
+    component: RutaNoEncontradaComponent }
 ];
 
 @NgModule({
