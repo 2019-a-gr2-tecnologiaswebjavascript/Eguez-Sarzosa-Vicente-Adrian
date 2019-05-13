@@ -6,6 +6,7 @@ import { RutaProductosComponent } from './rutas/ruta-productos/ruta-productos.co
 import { RutaNoEncontradaComponent } from './rutas/ruta-no-encontrada/ruta-no-encontrada.component';
 import { RutaProductosHogarComponent } from './rutas/ruta-productos-hogar/ruta-productos-hogar.component';
 import { RutaProductosVideojuegosComponent } from './rutas/ruta-productos-videojuegos/ruta-productos-videojuegos.component';
+import { EstaLogeadoService } from './servicios/guards/esta-logeado.service';
 
 const routes: Routes = [
   {
@@ -14,7 +15,10 @@ const routes: Routes = [
   },
   {
      path: 'creditos/:idCredito/:tasaReferencia',
-     component: RutaCreditosComponent
+     component: RutaCreditosComponent,
+     canActivate:[
+      EstaLogeadoService
+     ],
   },
   {
      path: 'productos',
