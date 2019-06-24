@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { UsuarioHttpService } from './servicios/http/usuario-http.service';
 import { ProductoHttpService } from './servicios/http/producto-http.service';
+import { ProductoUsuarioHttpService } from './servicios/http/producto-usuario-http.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ export class AppComponent implements OnInit {
 
   constructor(private readonly _httpClient: HttpClient,
               private readonly _usuarioHttpService: UsuarioHttpService,
-              private readonly _productoHttpService: ProductoHttpService){
+              private readonly _productoHttpService: ProductoHttpService,
+              private readonly _productoUsuarioHttpService: ProductoUsuarioHttpService){
 
   }
 
@@ -59,7 +61,21 @@ export class AppComponent implements OnInit {
         },
       );
 
-
+      const productoUsuarioCrear$ = this._productoUsuarioHttpService
+      .crear({
+        cantidad: 25,
+        fkUsuario:1,
+        fkProducto:1
+      });
+      productoUsuarioCrear$
+      .subscribe(
+        (nuevoProductoUsuario)=>{
+          console.log(nuevoProductoUsuario);
+        },
+        (error)=>{
+          console.error(error);
+        },
+      );
 
     const url = environment.url + "/Usuario";
     
