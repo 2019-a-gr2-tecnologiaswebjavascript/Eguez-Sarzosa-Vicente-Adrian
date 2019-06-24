@@ -40,7 +40,9 @@ export class UsuarioHttpService extends HttpSailsPrincipal<Usuario>{
 // 7) Traer los correos que sean de gmail
 // http://localhost:1337/Usuario?where={"correo":{"endsWith":"gmail.com"}}
 
-
+// Find usuario id 5
+// productos usuario id 5 [12,44,53]
+// localizacion productos con id [12,44,53]
 
 
 
