@@ -18,7 +18,16 @@ export class AppComponent implements OnInit {
 
   ngOnInit(){
     const usuarioCrear$ = this._usuarioHttpService
-      .crear({nombre:"Felipe",apellido:"Caicedo"});
+      .crear({
+        nombre:"Felipe",
+        apellido:"Caicedo",
+        cedula:'1718137159',
+        correo:'eadepto@hotmail.com',
+        estaCasado: false,
+        username:'adrianeguez',
+        sueldo: 120,
+        tipoUsuario: 'normal'
+      });
 
     usuarioCrear$
       .subscribe(
