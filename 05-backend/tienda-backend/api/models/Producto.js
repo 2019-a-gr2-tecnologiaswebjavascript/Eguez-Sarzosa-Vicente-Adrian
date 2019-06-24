@@ -16,6 +16,7 @@ module.exports = {
     codigo:{
       type: 'string',
       required: true,
+      unique:true,
       minLength: 4
     },// Configuracion de papa
     arregloProductosUsuario:{
