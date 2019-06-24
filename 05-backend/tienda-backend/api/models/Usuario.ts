@@ -55,3 +55,6 @@ module.exports = {
 
 };
 
+// Usuario -> ProductosUsuario
+
+// Producto <  ProductosUsuario    > Usuario
