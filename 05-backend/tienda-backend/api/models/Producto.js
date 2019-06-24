@@ -16,7 +16,11 @@ module.exports = {
     codigo:{
       type: 'string',
       required: true,
-      minLenght: 4
+      minLength: 4
+    },// Configuracion de papa
+    arregloProductosUsuario:{
+      collection: 'productoUsuario', // Modelo a relacionarse (Hijo)
+      via: 'fkProducto'  // FK Modelo a relacionarse
     }
 
   },

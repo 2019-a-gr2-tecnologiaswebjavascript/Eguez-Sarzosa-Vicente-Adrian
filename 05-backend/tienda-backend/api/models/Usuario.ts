@@ -45,12 +45,17 @@ module.exports = {
     tipoUsuario:{
       type: 'string',
       enum: ['normal','pendiente','premium'],
-      defaulstTo: 'normal'
+      defaultsTo: 'normal'
     },
     correo:{
       type:'string',
       isEmail: true
+    }, // Configuracion PAPA
+    arregloProductosUsuario:{ // nombre de los hijos
+      collection: 'productoUsuario', // modelo a relacionarse (HIJO)
+      via: 'fkUsuario'  // Nombre atributo FK (HIJO)
     }
+
   },
 
 };
@@ -58,3 +63,8 @@ module.exports = {
 // Usuario -> ProductosUsuario
 
 // Producto <  ProductosUsuario    > Usuario
+
+
+// Usuario -> ProductoUsuario
+
+// Producto -> ProductoUsuario
