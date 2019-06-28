@@ -4,11 +4,84 @@
  * @description :: Server-side actions for handling incoming requests.
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
+declare var Producto;
 
 module.exports = {
-  
+    // req = peticion = request
+    // res = respuesta = response
+    // URL EXPRESSJS => https://expressjs.com/es/4x/api.html
+    // REQUEST SAILSJS => https://sailsjs.com/documentation/reference/request-req
+    // RESPONSE SAILSJS => https://sailsjs.com/documentation/reference/request-req
+    saludar: async (req, res) => {
+        const parametros = req.allParams();
+        // req.param('nombre'); => 'Adrian'
+        console.log(parametros);
+        const nombre = parametros.nombre
+        if(nombre){
+            // PROMESA!!!! -> SYNC
+            try{
+                const productoEncontrado = await Producto.find({
+                    where: {
+                        id:1
+                    },
+                    skip:0,
+                    limit:5,
+                    sort: 'id ASC' // 'id DESC'
+                });
+                return res.ok({
+                    mensaje: `Bienvenido ${nombre}`,
+                    productoEncontrado: productoEncontrado
+                })
+            } catch(e){
+                console.error(e);
+                return res.serverError({
+                    error: 500,
+                    mensaje:'Error del servidor'
+                });
+            }
 
+            
+        }else{
+            return res.serverError({
+                error:400,
+                mensaje:'Peticion invalida'
+            });
+        }
+    },
+    upload: (req, res) => {
+        const opcionesCarga = {
+            maxBytes:10000000
+        }
+        req.file('imagen')
+            .upload(
+                opcionesCarga,
+                (error, archivosSubidos) => {
+                    if(error){
+                        return res.serverError({
+                            error: 500,
+                            mensaje: 'Error subiendo archivo de imagen'
+                        });
+                    }
+
+                }
+            )
+    }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // PROTOCOLO HTTP
 
