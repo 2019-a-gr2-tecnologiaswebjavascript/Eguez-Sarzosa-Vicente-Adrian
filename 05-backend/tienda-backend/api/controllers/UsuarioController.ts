@@ -13,6 +13,8 @@ module.exports = {
     // REQUEST SAILSJS => https://sailsjs.com/documentation/reference/request-req
     // RESPONSE SAILSJS => https://sailsjs.com/documentation/reference/request-req
     saludar: async (req, res) => {
+
+        console.log(__dirname);
         const parametros = req.allParams();
         // req.param('nombre'); => 'Adrian'
         console.log(parametros);
@@ -50,7 +52,8 @@ module.exports = {
     },
     upload: (req, res) => {
         const opcionesCarga = {
-            maxBytes:10000000
+            maxBytes:10000000,
+            dirname: __dirname + '/../../archivos',
         }
         req.file('imagen')
             .upload(
@@ -61,6 +64,16 @@ module.exports = {
                             error: 500,
                             mensaje: 'Error subiendo archivo de imagen'
                         });
+                    }
+                    const noExistenArchivos = archivosSubidos.length === 0;
+                    if(noExistenArchivos) {
+                        return res.badRequest({
+                            error: 400,
+                            mensaje: 'No envia ningun archivo'
+                        });
+                    } else {
+                        console.log(archivosSubidos);
+                        return res.ok({mensaje: 'ok'});
                     }
 
                 }
@@ -156,7 +169,8 @@ module.exports = {
 
 
 
-
+// /tienda-backend/api/controllers   /../../archivos
+// 
 
 
 
