@@ -6,8 +6,6 @@
  */
 declare var Producto;
 
-import * as SkipperDisk from 'skipper-disk';
-
 module.exports = {
     // req = peticion = request
     // res = respuesta = response
@@ -140,24 +138,13 @@ module.exports = {
                         error:400,
                         mensaje:'No existe el producto'
                     });
-                }else{
+                } else {
                     if(productoEncontrado.descriptorArchivo){
-                        const adaptadorArchivo = 
-                                    SkipperDisk();
-                        res.set('Content-disposition',
-                                `attachment: filename='${productoEncontrado.nombreArchivo}'`)
-.                       adaptadorArchivo
-                            .read(productoEncontrado.descriptorArchivo)
-                            .on(
-                                'error',
-                                (err)=>{
-                                    return res.serverError({
-                                        error:500,
-                                        mensaje:'No existe el producto'
-                                    });
-                                }
-                            )
-                            .pipe(res);
+
+                        return res.download(
+                            productoEncontrado.descriptorArchivo,
+                            productoEncontrado.nombreArchivo
+                            );
 
                     } else{
                         return res.badRequest({
@@ -169,7 +156,11 @@ module.exports = {
 
                 
             } catch(e){
-
+                console.log(e);
+                return res.serverError({
+                    error:500,
+                    mensaje:'No envia el id del producto'
+                });
             }
 
         }else{
