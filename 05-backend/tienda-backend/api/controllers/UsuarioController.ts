@@ -6,6 +6,8 @@
  */
 declare var Producto;
 
+import * as SkipperDisk from 'skipper-disk';
+
 module.exports = {
     // req = peticion = request
     // res = respuesta = response
@@ -95,7 +97,7 @@ module.exports = {
                                 mensaje: `Se actualizo el producto ${parametros.idProducto}`
                             })
                         }catch(e){
-                            return res.error({
+                            return res.serverError({
                                 error:500,
                                 mensaje:'Error del servidor'
                             });
@@ -122,6 +124,60 @@ module.exports = {
 
 
         
+    },
+    download: async (req, res) => {
+        const parametros = req.allParams();
+        if(parametros.idProducto){
+
+            try{
+                const productoEncontrado = 
+                            await Producto.findOne({
+                                id:parametros.idProducto
+                            });
+                
+                if(!productoEncontrado){
+                    return res.badRequest({
+                        error:400,
+                        mensaje:'No existe el producto'
+                    });
+                }else{
+                    if(productoEncontrado.descriptorArchivo){
+                        const adaptadorArchivo = 
+                                    SkipperDisk();
+                        res.set('Content-disposition',
+                                `attachment: filename='${productoEncontrado.nombreArchivo}'`)
+.                       adaptadorArchivo
+                            .read(productoEncontrado.descriptorArchivo)
+                            .on(
+                                'error',
+                                (err)=>{
+                                    return res.serverError({
+                                        error:500,
+                                        mensaje:'No existe el producto'
+                                    });
+                                }
+                            )
+                            .pipe(res);
+
+                    } else{
+                        return res.badRequest({
+                            error:400,
+                            mensaje:'No existe el fd'
+                        });
+                    }
+                }
+
+                
+            } catch(e){
+
+            }
+
+        }else{
+            return res.serverError({
+                error:400,
+                mensaje:'No envia el id del producto'
+            });
+        }
     }
 };
 
