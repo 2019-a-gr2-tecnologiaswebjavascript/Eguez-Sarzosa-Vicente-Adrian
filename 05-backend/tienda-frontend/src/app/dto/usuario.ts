@@ -10,5 +10,5 @@ export interface Usuario {
     estaCasado?: boolean;
     tipoUsuario?: 'normal' | 'pendiente' | 'premium';
     arregloProductosUsuario?:any[]
+    correo?:string;
 }
-correo?:string;

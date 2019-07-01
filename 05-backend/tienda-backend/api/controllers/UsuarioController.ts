@@ -125,6 +125,7 @@ module.exports = {
     },
     download: async (req, res) => {
         const parametros = req.allParams();
+        console.log(parametros);
         if(parametros.idProducto){
 
             try{
@@ -140,7 +141,8 @@ module.exports = {
                     });
                 } else {
                     if(productoEncontrado.descriptorArchivo){
-
+                        
+                        console.log(productoEncontrado.nombreArchivo);
                         return res.download(
                             productoEncontrado.descriptorArchivo,
                             productoEncontrado.nombreArchivo
