@@ -12,6 +12,7 @@ import { ProductoUsuarioHttpService } from './servicios/http/producto-usuario-ht
 })
 export class AppComponent implements OnInit {
   title = 'tienda-frontend';
+  archivo: File;
 
   constructor(private readonly _httpClient: HttpClient,
               private readonly _usuarioHttpService: UsuarioHttpService,
@@ -93,6 +94,36 @@ export class AppComponent implements OnInit {
             }
           )
   }
+
+  seleccionarArchivo(evento){
+    const listaArchivos: FileList = 
+                    evento.target.files;
+    const validaciones = {
+      existeArchivo: listaArchivos.length > 0
+    }
+    if(validaciones.existeArchivo){
+      const archivo = listaArchivos[0];
+      console.log(archivo);
+      this.archivo = archivo;
+    }
+
+  }
+
+  enviarArchivo(){
+    const producto$ = this._productoHttpService
+                          .cargarArchivo(
+                            this.archivo,1);
+    producto$
+      .subscribe(
+        (datos)=>{
+          console.log(datos);
+        },
+        (error)=>{
+          console.error(error);
+        }
+      );
+  }
+
 
 
 
