@@ -50,7 +50,7 @@ module.exports = {
             });
         }
     },
-    upload: (req, res) => {
+    upload:  (req, res) => {
         const parametros = req.allParams();
 
         const opcionesCarga = {
@@ -63,7 +63,7 @@ module.exports = {
             req.file('imagen')
             .upload(
                 opcionesCarga,
-                (error, archivosSubidos) => {
+                async (error, archivosSubidos) => {
                     if(error){
                         return res.serverError({
                             error: 500,
@@ -79,7 +79,30 @@ module.exports = {
                     } else {
                         console.log(archivosSubidos);
 
+                        try{
+                            const archivo = archivosSubidos[0];
+                            const respuestaActualizar = 
+                                    await Producto.updateOne({
+                                         id: parametros.idProducto
+                                        })
+                                        .set({
+                                            tamanio: archivo.size,
+                                            descriptorArchivo:archivo.fd,
+                                            nombreArchivo:archivo.filename,
+                                            tipo: archivo.type
+                                        });                                                         
+                            return res.ok({
+                                mensaje: `Se actualizo el producto ${parametros.idProducto}`
+                            })
+                        }catch(e){
+                            return res.error({
+                                error:500,
+                                mensaje:'Error del servidor'
+                            });
+                        }
                         
+
+
                         // LOGICA NEGOCIO
                         // GUARDAR LOS METADATOS DEL ARCHIVO
                         // (ID PRODUCTO)
