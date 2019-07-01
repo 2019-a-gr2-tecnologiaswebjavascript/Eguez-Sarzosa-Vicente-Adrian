@@ -51,11 +51,16 @@ module.exports = {
         }
     },
     upload: (req, res) => {
+        const parametros = req.allParams();
+
         const opcionesCarga = {
             maxBytes:10000000,
             dirname: __dirname + '/../../archivos',
-        }
-        req.file('imagen')
+        };
+        
+        if(parametros.idProducto) {
+
+            req.file('imagen')
             .upload(
                 opcionesCarga,
                 (error, archivosSubidos) => {
@@ -73,11 +78,27 @@ module.exports = {
                         });
                     } else {
                         console.log(archivosSubidos);
+
+                        
+                        // LOGICA NEGOCIO
+                        // GUARDAR LOS METADATOS DEL ARCHIVO
+                        // (ID PRODUCTO)
+
                         return res.ok({mensaje: 'ok'});
                     }
 
                 }
-            )
+            );
+
+        } else {
+            return res.error({
+                error:400,
+                mensaje:'No envia id de producto'
+            })
+        }
+
+
+        
     }
 };
 
